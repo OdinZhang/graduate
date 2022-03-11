@@ -1,1 +1,62 @@
 \section{基于深度神经网络的游戏推荐算法}
+
+\subsection{word2vec}
+
+word2vec是一种比较流行的词嵌入的方法，
+通过将单词转换为定长的向量以方便进行计算。
+相对于One-Hot编码来说，
+没有了过于稀疏的问题，
+同时也可以更好地表达词与词之间的相似或类比关系。
+
+word2vec包含有两个模型，
+即跳元模型\cite{mikolovDistributedRepresentationsWords2013}
+（Skip-gram）
+与连续词袋模型\cite{mikolovEfficientEstimationWord2013}
+（Continuous Bag of Words），
+模型结构如\cref{fig:word2vec}所示。
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/word2vec.pdf}
+    \caption{word2vec模型}
+    \label{fig:word2vec}
+\end{figure}
+
+\subsubsection{跳元模型}
+
+假设一个单词序列$W = \left\{w_1, w_2, w_3, \ldots, w_T\right\}$，
+中心词为$w_t$，
+上下文窗口为$2$。
+则给定中心词$w_t$，
+生成上下文词$w_{t-2}, w_{t-1}, w_{t+1}, w_{t+2}$的条件概率为：
+\begin{equation}
+    \label{eq:con}
+    P(w_{t-2}, w_{t-1}, w_{t+1}, w_{t+2}|w_t)
+\end{equation}
+
+若上下文词是在给定中心词的情形下满足条件独立性，
+则\cref{eq:con}可以改写为：
+\begin{equation}
+    P(w_{t-2}|w_t)P(w_{t-1}|w_t)P(w_{t+1}|w_t)P(w_{t+2}|w_t)
+\end{equation}
+
+令$\mathbf{v}_{w_t}\in\mathbb{R}^d$和
+$\mathbf{u}_{w_t}\in\mathbb{R}^d$
+表示$w_t$分别作为中心词和上下文词时的两个$d$维向量。
+给定中心词$w_I$，
+生成的上下文词$w_O$
+的条件概率可以通过softmax函数定义：
+\begin{equation}
+    P(w_O|w_I) = \frac{\exp\left(\mathbf{u}_{w_O}^T\mathbf{v}_{w_I}\right)}{\sum_{w_t\in W}\exp\left(\mathbf{u}_{w_t}^T\mathbf{v}_{w_I}\right)}
+\end{equation}
+
+由于跳元模型是依据条件概率所构建的，
+因此我们可以通过极大似然估计来作为模型优化方向，
+即：
+\begin{equation}
+    \frac{1}{T}\sum^T_{t=1}\sum_{-c\leqslant j\leqslant c, j\neq 0}\log\left(w_{t+j|w_t}\right)
+\end{equation}
+
+其中$c$为上下文窗口的大小。
+
+\subsubsection{连续词袋模型}

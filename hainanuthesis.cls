@@ -1,6 +1,13 @@
 \ProvidesClass{hainanuthesis}
 \LoadClass[linespread=1.5,a4paper,zihao=-4,fontset=windows]{ctexart}
 
+% 图片
+\RequirePackage{graphicx}
+
+% 数学
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+
 % 英文字体
 \RequirePackage{fontspec}
 \setmainfont{Times New Roman}
