@@ -47,7 +47,7 @@ $\mathbf{u}_{w_t}\in\mathbb{R}^d$
 生成的上下文词$w_O$
 的条件概率可以通过softmax函数定义：
 \begin{equation}
-    P(w_O|w_I) = \frac{\exp\left(\mathbf{u}_{w_O}^T\mathbf{v}_{w_I}\right)}{\sum_{w_t\in W}\exp\left(\mathbf{u}_{w_t}^T\mathbf{v}_{w_I}\right)}
+    P\left(w_O|w_I\right) = \frac{\exp\left(\mathbf{u}_{w_O}^T\mathbf{v}_{w_I}\right)}{\sum_{w_t\in W}\exp\left(\mathbf{u}_{w_t}^T\mathbf{v}_{w_I}\right)}
 \end{equation}
 
 由于跳元模型是依据条件概率所构建的，
@@ -60,3 +60,20 @@ $\mathbf{u}_{w_t}\in\mathbb{R}^d$
 其中$c$为上下文窗口的大小。
 
 \subsubsection{连续词袋模型}
+
+连续词袋模型存在多个上下文词，
+故需要在计算条件概率时对上下文词向量进行平均。
+即令$\mathbf{v}_{w_t}\in\mathbb{R}^d$和
+$\mathbf{u}_{w_t}\in\mathbb{R}^d$
+表示$w_t$分别作为中心词和上下文词时的两个$d$维向量。
+给定上下文词$w_{O_1}, w_{O_2}, \ldots, w_{O_{2c}}$
+生成任意中心词$w_I$的条件概率可以表示为：
+\begin{equation}
+    P\left(w_I|w_{O_1}, \ldots, w_{O_{2c}}\right) = \frac{\exp\left(\frac{1}{2c}\mathbf{v}_I^T\left(\mathbf{u}_{O_1}+\ldots+\mathbf{u}_{O_{2c}}\right)\right)}{\sum_{w_t\in W}\exp\left(\frac{1}{2c}\mathbf{v}_{w_t}\left(\mathbf{u}_{O_1}+\ldots+\mathbf{u}_{O_{2c}}\right)\right)}
+\end{equation}
+
+由此，
+连续词袋模型的损失函数可以定义为：
+\begin{equation}
+    -\sum_{t=1}^T\log P\left(w_t|w_{t-c}, \ldots, w_{t-1}, w_{t+1}, \ldots, w_{t+c}\right)
+\end{equation}
