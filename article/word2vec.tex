@@ -153,3 +153,20 @@ $X$和$Y$的并集，
 从而利用相关算法达到简化计算的目的。
 
 \subsubsection{负采样NEG}
+
+负采样实际上是NEC的一种特殊情况，
+即使$\frac{T_n}{T_d}p_n\left(\mathbf{u}\right)=1$。
+把给定中心词$w_I$，
+生成的上下文词$w_O$被认为是由\cref{eq:sigma}
+建模的概率事件。
+\begin{equation}
+    \label{eq:sigma}
+    \begin{aligned}
+        P\left(D=1|w_I,w_O\right) &= \sigma\left(\mathbf{u}_O^T\mathbf{v}_I\right)\\
+        \sigma(x)&=\frac{1}{1+\exp(-x)}
+    \end{aligned}
+\end{equation}
+
+同理，
+可以得出相应的对数损失函数。
+% TODO 此处应算出相应的损失函数
