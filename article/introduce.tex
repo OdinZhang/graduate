@@ -68,9 +68,57 @@ $S$作为所有可作为推荐项目的集合。
 相似度的计算主要可以分为以下三种
 \cite{heJiYuJuanJiShenJingWangLuoDeYinLeTuiJianXiTong2019}：
 \begin{itemize}
+    \item 欧几里得距离
     \item 余弦相似度
     \item 皮尔逊相关系数
-    \item 欧几里得距离
 \end{itemize}
+
+\subsubsection{欧几里得距离}
+
+欧几里得距离（欧氏距离）
+通常是用来计算在欧几里得空间（欧氏空间）
+中两点间的直线距离。
+假设$x$和$y$是$n$维欧氏空间中的两点，
+则其欧氏距离为：
+\begin{equation}
+    d(x,y)=\sqrt{\sum_{i=1}^n\left(x_i-y_i\right)^2}
+\end{equation}
+
+当使用欧氏距离计算相似度时可以使用公式\cref{eq:o2sim}来进行转换。
+显然地，
+距离越小，
+相似度就会越大。
+\begin{equation}
+    \label{eq:o2sim}
+    s(x,y)=\frac{1}{1+d(x,y)}
+\end{equation}
+
+\subsubsection{余弦相似度}
+
+余弦相似度通过计算两一阶张量间夹角的余弦值来度量其相似度。
+余弦值越大，
+则认为其相似度越高。
+反之，
+余弦值越小，
+则认为相似度随之越小。
+余弦相似度的形式化定义为：
+\begin{equation}
+    s(\mathbf{x},\mathbf{y})=
+    \frac{\mathbf{x}\cdot\mathbf{y}}{\lVert\mathbf{x}\rVert\lVert\mathbf{y}\rVert}
+    =\frac{\sum_{i=1}^nx_iy_i}{\sqrt{\sum_{i=1}^n\left(x_i\right)^2}\sqrt{\sum_{i=1}^n\left(y_i\right)^2}}
+\end{equation}
+
+\subsubsection{皮尔逊相关系数}
+
+皮尔逊（Pearson）
+相关系数在统计学中通常用于计算两变量$X$与$Y$
+之间的线性相关程度，
+取值范围为$\left[-1,1\right]$。
+相关系数越大，
+则认为二者间相似度越高。
+Pearson相关系数计算公式定义为：
+\begin{equation}
+    r=\frac{\sum_{i=1}^n\left(X_i-\overbari{X}\right)\left(Y_i-\overbar{Y}\right)}{\sqrt{\sum_{i=1}^n\left(X_i-\overbari{X}\right)^2}\sqrt{\sum_{i=1}^n\left(Y_i-\overbar{Y}\right)^2}}
+\end{equation}
 
 \subsection{混合推荐}
