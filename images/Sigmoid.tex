@@ -1,0 +1,11 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+\begin{document}
+\begin{tikzpicture}
+    \draw[->](-4, 0)--(0, 0)node[below right]{$O$}--(4,0)node[below]{$x$};
+    \draw[->](0, -1)--(0, 4)node[left]{$y$};
+    \draw[domain=-3.5:3.5, very thick]plot(\x, {3/(1+e^(-\x))});
+    \draw[densely dashed, domain=-4:4](-4, 3)--(3,3)node[above]{$x=1$}--(4,3);
+\end{tikzpicture}
+\end{document}

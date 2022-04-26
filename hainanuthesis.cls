@@ -85,6 +85,8 @@
 \crefrangeformat{equation}{~(#3#1#4)\;\~{}\;(#5#2#6)}
 \crefmultiformat{equation}{~(#2#1#3)}{ 和~(#2#1#3)}{，(#2#1#3)}{ 和~(#2#1#3)}
 
+\crefformat{algocf}{#2算法#1#3}
+
 \RequirePackage{caption}
 \DeclareCaptionFont{song}{\songti}
 \DeclareCaptionFont{five}{\zihao{5}}

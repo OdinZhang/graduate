@@ -1,0 +1,11 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+\begin{document}
+\begin{tikzpicture}
+\draw[->](-4, 0)--(0,0)node[below right]{$O$}--(4,0)node[below]{$x$};
+\draw[->](0, -1)--(0, 4)node[left]{$y$};
+\draw[domain=-3.5:0, very thick]plot(\x, 0);
+\draw[domain=0:3.5, very thick]plot(\x, \x);
+\end{tikzpicture}
+\end{document}

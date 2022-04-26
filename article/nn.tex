@@ -7,8 +7,9 @@
 神经元通过接收来自其他$n$个神经元的输入信号，
 通过带权重的连接进行传递，
 神经元接收到的总输入值与神经元的阈值进行比较，
-然后通过激活函数进行处理以产生输出\cite{zhouJiQiXueXi}.
+然后通过激活函数进行处理以产生输出\cite{zhouzhihuaJiQiXueXi}.
 
+% TODO redraw it
 \begin{figure}[!h]
     \centering
     \includegraphics[width=.8\textwidth]{images/M-P_nn_model.pdf}
@@ -29,13 +30,13 @@
 
 \begin{figure}
     \centering
-    \begin{minipage}[c]{0.45\textwidth}
+    \begin{minipage}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=0.95\textwidth]{images/Sigmoid.pdf}
         \subcaption{Sigmoid}
         \label{fig:sigmoid}
     \end{minipage}
-    \begin{minipage}[c]{0.45\textwidth}
+    \begin{minipage}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=0.95\textwidth]{images/ReLU.pdf}
         \subcaption{ReLU}
@@ -151,7 +152,7 @@ $b_h$为隐层第$h$个神经元的输出.
     \end{aligned}
 \end{equation}
 
-可以得到计算的算法如\cref{alg:nn}所示\cite{zhouJiQiXueXi}.
+可以得到计算的算法如\cref{alg:nn}所示\cite{zhouzhihuaJiQiXueXi}.
 
 \begin{algorithm}
     \KwIn{训练集$D=\left\{(x_k, y_k)\right\}^m_{k=1}$; 学习率$\eta$.}
@@ -177,27 +178,3 @@ $b_h$为隐层第$h$个神经元的输出.
 输出$1$，
 否则输出$0$.
 
-\subsection{卷积神经网络}
-
-卷积神经网络是目前深度学习技术领域中非常具有代表性的神经网络之一，
-在图像分析和处理领域取得了众多突破性的进展，
-在学术界常用的标准图像标注集ImageNet上，
-基于卷积神经网络取得了很多成就，
-包括图像特征提取分类、
-场景识别等.
-卷积神经网络相较于传统的图像处理算法的优点之一在于避免了对图像复杂的前期预处理过程，
-尤其是人工参与图像预处理过程，
-卷积神经网络可以直接输入原始图像进行一系列工作，
-至今己经广泛应用于各类图像相关的应用中.
-典型的深度学习模型就是很深层的神经网络，
-包含多个隐含层，
-多隐层的神经网络很难直接使用BP算法进行直接训练，
-因为反向传播误差时往往会发散，
-很难收敛.
-CNN节省训练开销的方式是权共享（weight sharing），
-让一组神经元使用相同的权值
-主要用于图像识别领域.
-卷积神经网络中有三个基本的概念：
-局部感受野（Local Receptive Fields）、
-共享权值（Shared Weights）、
-池化（Pooling）.
