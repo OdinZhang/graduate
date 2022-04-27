@@ -233,6 +233,23 @@
   file = {D\:\\Austi\\Documents\\Zotero\\attachments\\2020\\Gong et al\\A Hybrid Recommender System for Steam Games\\Gong et al_2020_A Hybrid Recommender System for Steam Games.pdf}
 }
 
+@unpublished{guoDeepFMFactorizationMachineBased2017,
+  title = {{{DeepFM}}: {{A Factorization-Machine}} Based {{Neural Network}} for {{CTR Prediction}}},
+  shorttitle = {{{DeepFM}}},
+  author = {Guo, Huifeng and Tang, Ruiming and Ye, Yunming and Li, Zhenguo and He, Xiuqiang},
+  date = {2017-03-13},
+  eprint = {1703.04247},
+  eprinttype = {arxiv},
+  primaryclass = {cs},
+  url = {http://arxiv.org/abs/1703.04247},
+  urldate = {2022-04-27},
+  abstract = {Learning sophisticated feature interactions behind user behaviors is critical in maximizing CTR for recommender systems. Despite great progress, existing methods seem to have a strong bias towards low- or high-order interactions, or require expertise feature engineering. In this paper, we show that it is possible to derive an end-to-end learning model that emphasizes both low- and high-order feature interactions. The proposed model, DeepFM, combines the power of factorization machines for recommendation and deep learning for feature learning in a new neural network architecture. Compared to the latest Wide \textbackslash\& Deep model from Google, DeepFM has a shared input to its "wide" and "deep" parts, with no need of feature engineering besides raw features. Comprehensive experiments are conducted to demonstrate the effectiveness and efficiency of DeepFM over the existing models for CTR prediction, on both benchmark data and commercial data.},
+  archiveprefix = {arXiv},
+  version = {1},
+  keywords = {Computer Science - Computation and Language,Computer Science - Information Retrieval},
+  file = {D\:\\Austi\\Documents\\Zotero\\attachments\\2017\\Guo et al\\DeepFM\\Guo et al_2017_DeepFM.pdf;D\:\\Austi\\Documents\\Zotero\\config\\storage\\CWST29N2\\1703.html}
+}
+
 @article{guShenDuXueXiKuangJiaXiaHunHeXieTongGuoLuSuanFaYanJiu2022,
   title = {深度学习框架下混合协同过滤算法研究},
   author = {古, 险峰 and 白, 林锋},
@@ -311,6 +328,21 @@
   keywords = {attention mechanism,convolutional neural network,system operation and maintenance,专家推荐,卷积神经网络,注意力机制,系统运维 expert recommendation},
   annotation = {7 citations(CNKI)[2022-1-15]{$<$}北大核心, CSCD{$>$}},
   file = {D\:\\Austi\\Documents\\Zotero\\attachments\\2019\\何_徐\\基于注意力卷积神经网络的工作票专家推荐方法\\何_徐_2019_基于注意力卷积神经网络的工作票专家推荐方法.pdf}
+}
+
+@unpublished{heNeuralFactorizationMachines2017,
+  title = {Neural {{Factorization Machines}} for {{Sparse Predictive Analytics}}},
+  author = {He, Xiangnan and Chua, Tat-Seng},
+  date = {2017-08-16},
+  eprint = {1708.05027},
+  eprinttype = {arxiv},
+  primaryclass = {cs},
+  url = {http://arxiv.org/abs/1708.05027},
+  urldate = {2022-04-27},
+  abstract = {Many predictive tasks of web applications need to model categorical variables, such as user IDs and demographics like genders and occupations. To apply standard machine learning techniques, these categorical predictors are always converted to a set of binary features via one-hot encoding, making the resultant feature vector highly sparse. To learn from such sparse data effectively, it is crucial to account for the interactions between features. Factorization Machines (FMs) are a popular solution for efficiently using the second-order feature interactions. However, FM models feature interactions in a linear way, which can be insufficient for capturing the non-linear and complex inherent structure of real-world data. While deep neural networks have recently been applied to learn non-linear feature interactions in industry, such as the Wide\&Deep by Google and DeepCross by Microsoft, the deep structure meanwhile makes them difficult to train. In this paper, we propose a novel model Neural Factorization Machine (NFM) for prediction under sparse settings. NFM seamlessly combines the linearity of FM in modelling second-order feature interactions and the non-linearity of neural network in modelling higher-order feature interactions. Conceptually, NFM is more expressive than FM since FM can be seen as a special case of NFM without hidden layers. Empirical results on two regression tasks show that with one hidden layer only, NFM significantly outperforms FM with a 7.3\% relative improvement. Compared to the recent deep learning methods Wide\&Deep and DeepCross, our NFM uses a shallower structure but offers better performance, being much easier to train and tune in practice.},
+  archiveprefix = {arXiv},
+  keywords = {Computer Science - Machine Learning},
+  file = {D\:\\Austi\\Documents\\Zotero\\attachments\\2017\\He_Chua\\Neural Factorization Machines for Sparse Predictive Analytics\\He_Chua_2017_Neural Factorization Machines for Sparse Predictive Analytics.pdf;D\:\\Austi\\Documents\\Zotero\\config\\storage\\Q3QF73AS\\1708.html}
 }
 
 @article{heRongHeJuFaGuiZeHeCNNDeLuYouPingLunQingGanFenXi2019,
@@ -431,6 +463,24 @@
   langid = {english},
   annotation = {Accepted: 2020-06-27T20:42:40Z},
   file = {D\:\\Austi\\Documents\\Zotero\\attachments\\2018\\Ion\\Designing and evaluating a board game recommender system\\Ion_2018_Designing and evaluating a board game recommender system.pdf;D\:\\Austi\\Documents\\Zotero\\config\\storage\\ET4BTTFL\\1444.html}
+}
+
+@inproceedings{juanFieldawareFactorizationMachines2016,
+  title = {Field-Aware {{Factorization Machines}} for {{CTR Prediction}}},
+  booktitle = {Proceedings of the 10th {{ACM Conference}} on {{Recommender Systems}}},
+  author = {Juan, Yuchin and Zhuang, Yong and Chin, Wei-Sheng and Lin, Chih-Jen},
+  date = {2016-09-07},
+  series = {{{RecSys}} '16},
+  pages = {43--50},
+  publisher = {{Association for Computing Machinery}},
+  location = {{New York, NY, USA}},
+  doi = {10.1145/2959100.2959134},
+  url = {https://doi.org/10.1145/2959100.2959134},
+  urldate = {2022-04-27},
+  abstract = {Click-through rate (CTR) prediction plays an important role in computational advertising. Models based on degree-2 polynomial mappings and factorization machines (FMs) are widely used for this task. Recently, a variant of FMs, field-aware factorization machines (FFMs), outperforms existing models in some world-wide CTR-prediction competitions. Based on our experiences in winning two of them, in this paper we establish FFMs as an effective method for classifying large sparse data including those from CTR prediction. First, we propose efficient implementations for training FFMs. Then we comprehensively analyze FFMs and compare this approach with competing models. Experiments show that FFMs are very useful for certain classification problems. Finally, we have released a package of FFMs for public use.},
+  isbn = {978-1-4503-4035-9},
+  keywords = {click-through rate prediction,computational advertising,factorization machines,machine learning},
+  file = {D\:\\Austi\\Documents\\Zotero\\attachments\\2016\\Juan et al\\Field-aware Factorization Machines for CTR Prediction\\Juan et al_2016_Field-aware Factorization Machines for CTR Prediction.pdf}
 }
 
 @inproceedings{kangSelfAttentiveSequentialRecommendation2018,
@@ -686,6 +736,20 @@
   langid = {chinese},
   keywords = {context information,factorization machines,recommendation-acceptance rate,time complexity,上下文信息,因子分解,推荐接受率 recommender system,推荐系统,时间复杂度},
   file = {D\:\\Austi\\Documents\\Zotero\\attachments\\2021\\乔_圣\\融合因子分解的上下文推荐算法研究\\乔_圣_2021_融合因子分解的上下文推荐算法研究.pdf}
+}
+
+@inproceedings{rendleFactorizationMachines2010,
+  title = {Factorization {{Machines}}},
+  booktitle = {2010 {{IEEE International Conference}} on {{Data Mining}}},
+  author = {Rendle, Steffen},
+  date = {2010},
+  pages = {995--1000},
+  issn = {2374-8486},
+  doi = {10.1109/ICDM.2010.127},
+  abstract = {In this paper, we introduce Factorization Machines (FM) which are a new model class that combines the advantages of Support Vector Machines (SVM) with factorization models. Like SVMs, FMs are a general predictor working with any real valued feature vector. In contrast to SVMs, FMs model all interactions between variables using factorized parameters. Thus they are able to estimate interactions even in problems with huge sparsity (like recommender systems) where SVMs fail. We show that the model equation of FMs can be calculated in linear time and thus FMs can be optimized directly. So unlike nonlinear SVMs, a transformation in the dual form is not necessary and the model parameters can be estimated directly without the need of any support vector in the solution. We show the relationship to SVMs and the advantages of FMs for parameter estimation in sparse settings. On the other hand there are many different factorization models like matrix factorization, parallel factor analysis or specialized models like SVD++, PITF or FPMC. The drawback of these models is that they are not applicable for general prediction tasks but work only with special input data. Furthermore their model equations and optimization algorithms are derived individually for each task. We show that FMs can mimic these models just by specifying the input data (i.e. the feature vectors). This makes FMs easily applicable even for users without expert knowledge in factorization models.},
+  eventtitle = {2010 {{IEEE International Conference}} on {{Data Mining}}},
+  keywords = {Computational modeling,Data models,Equations,factorization machine,Frequency modulation,Mathematical model,Predictive models,sparse data,support vector machine,Support vector machines,tensor factorization},
+  file = {D\:\\Austi\\Documents\\Zotero\\attachments\\2010\\Rendle\\Factorization Machines\\Rendle_2010_Factorization Machines.pdf;D\:\\Austi\\Documents\\Zotero\\config\\storage\\XI33MQ5N\\5694074.html}
 }
 
 @article{sahooDeepRecoDeepLearning2019,

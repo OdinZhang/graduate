@@ -12,6 +12,10 @@
 \RequirePackage{fontspec}
 \setmainfont{Times New Roman}
 
+% 算法
+\usepackage[linesnumbered, ruled, vlined]{algorithm2e}
+\renewcommand{\algorithmcfname}{算法}
+
 % 引入LaTeX3
 \RequirePackage{expl3}
 
