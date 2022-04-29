@@ -221,6 +221,49 @@ Adam算法结合了以上算法的优点，
     \label{alg:adam}
 \end{algorithm}
 
+虽然Adam算法成为了深度学习中最强大最有效的优化算法之一，
+但是仍然有一定的问题，
+比如Reddi等人\cite{reddiConvergenceAdam2019}
+指出Adam算法在某些情况下存在无法收敛的情况，
+因此，
+我们可以使用YOGI\cite{zaheerAdaptiveMethodsNonconvex2018}
+来进行热修复。
+
+Adam算法中对于$v_t$的更新为：
+\begin{equation}
+    v_t \leftarrow v_{t-1}-\left(1-\beta_{2}\right)\left(v_{t-1}-g_{t}^{2}\right)
+\end{equation}
+
+YOGI算法则建议我们将其修改为：
+\begin{equation}
+    v_{t-1}-\left(1-\beta_{2}\right) \operatorname{sign}\left(v_{t-1}-g_{t}^{2}\right) g_{t}^{2}
+\end{equation}
+
+因此，
+YOGI对Adam算法的重写如\cref{alg:yogi}所示。
+
+\begin{algorithm}
+    \KwData{$\alpha$：步长}
+    \KwData{$\beta_1,\beta_2\in [0,1)$：非负加权参数}
+    \KwData{$f(\theta)$：随机过程函数}
+    \KwData{$\theta_0$：初始参数矢量}
+    $m_0\leftarrow0$（初始化梯度动量）\;
+    $v_0\leftarrow0$（初始化梯度的二阶矩）\;
+    $t\leftarrow0$（初始化时间步长）\;
+    \While{$\theta_t$不收敛}{
+        $t\leftarrow t+1$\;
+        $g_{t} \leftarrow \nabla_{\theta} f_{t}\left(\theta_{t-1}\right)$（计算当前梯度）\;
+        $ m_{t} \leftarrow \beta_{1} \cdot m_{t-1}+\left(1-\beta_{1}\right) \cdot g_{t} $（更新当前梯度的动量）\;
+        $ v_{t} \leftarrow v_{t-1}-\left(1-\beta_{2}\right) \operatorname{sign}\left(v_{t-1}-g_{t}^{2}\right) g_{t}^{2} $（更新当前梯度的二阶矩）\;
+        $ \widehat{m}_{t} \leftarrow m_{t} /\left(1-\beta_{1}^{t}\right) $（标准化梯度的动量）\;
+        $ \widehat{v}_{t} \leftarrow v_{t} /\left(1-\beta_{2}^{t}\right) $（标准化梯度的二阶矩）\;
+        $ \theta_{t} \leftarrow \theta_{t-1}-\alpha \cdot \widehat{m}_{t} /\left(\sqrt{\widehat{v}_{t}}+\epsilon\right) $（更新参数）\;
+    }
+    \KwOut{$\theta_t$}
+    \caption{YOGI算法}
+    \label{alg:yogi}
+\end{algorithm}
+
 \subsection{分类问题的处理}
 
 对于二分类问题，
