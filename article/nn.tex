@@ -191,7 +191,35 @@ $b_h$为隐层第$h$个神经元的输出.
 
 \subsubsection{Adam算法}
 
+随着深度学习技术的不断发展，
+BP算法对于优化速度等方面逐渐不能满足于训练的需要，
+使用随机梯度下降算法比仅仅使用梯度下降算法更加有效，
+AdaGrad算法对于稀疏梯度的处理更加有效\cite{duchiAdaptiveSubgradientMethods2011}，
+RMSProp算法在在线和非平稳环境下表现更好\cite{tielemanLecture5rmspropDivide2012}。
+Adam算法结合了以上算法的优点，
+其具体实现参照\cref{alg:adam}\cite{kingmaAdamMethodStochastic2017}。
 
+\begin{algorithm}
+    \KwData{$\alpha$：步长}
+    \KwData{$\beta_1,\beta_2\in [0,1)$：非负加权参数}
+    \KwData{$f(\theta)$：随机过程函数}
+    \KwData{$\theta_0$：初始参数矢量}
+    $m_0\leftarrow0$（初始化梯度动量）\;
+    $v_0\leftarrow0$（初始化梯度的二阶矩）\;
+    $t\leftarrow0$（初始化时间步长）\;
+    \While{$\theta_t$不收敛}{
+        $t\leftarrow t+1$\;
+        $g_{t} \leftarrow \nabla_{\theta} f_{t}\left(\theta_{t-1}\right)$（计算当前梯度）\;
+        $ m_{t} \leftarrow \beta_{1} \cdot m_{t-1}+\left(1-\beta_{1}\right) \cdot g_{t} $（更新当前梯度的动量）\;
+        $ v_{t} \leftarrow \beta_{2} \cdot v_{t-1}+\left(1-\beta_{2}\right) \cdot g_{t}^{2} $（更新当前梯度的二阶矩）\;
+        $ \widehat{m}_{t} \leftarrow m_{t} /\left(1-\beta_{1}^{t}\right) $（标准化梯度的动量）\;
+        $ \widehat{v}_{t} \leftarrow v_{t} /\left(1-\beta_{2}^{t}\right) $（标准化梯度的二阶矩）\;
+        $ \theta_{t} \leftarrow \theta_{t-1}-\alpha \cdot \widehat{m}_{t} /\left(\sqrt{\widehat{v}_{t}}+\epsilon\right) $（更新参数）\;
+    }
+    \KwOut{$\theta_t$}
+    \caption{Adam算法}
+    \label{alg:adam}
+\end{algorithm}
 
 \subsection{分类问题的处理}
 
