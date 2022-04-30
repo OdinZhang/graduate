@@ -1,1 +1,52 @@
 \section{系统实验与结果分析}
+
+\subsection{数据处理}
+
+\subsubsection{数据集的来源}
+
+对于游戏推荐算法的研究较少，
+数据集的获取也较为困难，
+为了兼顾用户数据与游戏数据的广泛性与准确性，
+最终选择加利福尼亚大学圣迭戈分校（UCSD）
+的Steam游戏数据集
+（\url{https://cseweb.ucsd.edu/~jmcauley/datasets.html#steam_data}）。
+
+该数据集的基本统计情况如\cref{tb:dataset}所示。
+
+\begin{table}[!htbp]
+	\begin{center}
+		\caption{Steam数据集基本统计情况}\label{tb:dataset}
+		\begin{tabular}{cccc}
+			\toprule
+			条目 & 数量        & 条目 & 数量     \\
+			\midrule
+			评论 & 7,793,069 & 项目 & 15,474 \\
+			用户 & 2,567,538 & 合集 & 615    \\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+\end{table}
+
+\subsubsection{数据集的预处理}
+
+由于数据集分别包含了评论数据、
+用户数据、
+游戏数据、
+合集数据等。
+为了更方便地使用数据集进行训练，
+选择将澳大利亚的用户数据、
+澳大利亚用户评论数据、
+游戏数据进行内连接。
+
+鉴于数据集中有一定数据的缺失，
+选择将例如游戏制造商、
+游戏发行商、
+游戏标题等数据填充为\verb|NONE|，
+将游戏标签、
+游戏风格、
+游戏类型等修改为空列表，
+游戏价格填充为\verb|0|。
+
+对数据集处理后的可用条目为53,973条。
+选择将数据进行8--2划分，
+分别作为训练集和验证集。
