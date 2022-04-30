@@ -65,3 +65,28 @@ Word2Vec相较于FM等算法其计算性能较高，
 不需要设置过大的窗口，
 且几乎没有数据的损失。
 因此可以作为模型的预训练部分。
+
+\subsection{模型设计}
+
+模型主要将数据分为三个部分：
+稀疏数据、
+稠密数据、
+标签数据。
+稀疏数据主要通过FM进行特征提取，
+标签数据则通过Word2Vec进行处理，
+最终将三者通过全连接层连接，
+之后使用深度神经网络进行处理并得到结果，
+最终与用户打分进行比较。
+对于模型的设计见\cref{fig:model}。
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=.9\textwidth]{images/model.pdf}
+    \caption{模型设计}\label{fig:model}
+\end{figure}
+
+\subsubsection{FM模块设计}
+
+\subsubsection{Word2Vec模块设计}
+
+\subsubsection{深度神经网络模块设计}

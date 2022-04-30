@@ -1,20 +1,23 @@
 latex = latexmk --synctex=1 --interaction=nonstopmode --file-line-error --pdf --xelatex
-latex_imges = latexmk --synctex=1 --interaction=nonstopmode --file-line-error --pdf --xelatex --outdir=./images
+latex_images = latexmk --synctex=1 --interaction=nonstopmode --file-line-error --pdf --xelatex --outdir=./images
 
-all: M-P_nn_model.pdf ReLU.pdf Sigmoid.pdf word2vec.pdf
+all: M-P_nn_model.pdf ReLU.pdf Sigmoid.pdf word2vec.pdf model.pdf
 	$(latex) main.tex
 
 M-P_nn_model.pdf:
-	$(latex_imges)  M-P_nn_model.tex
+	$(latex_images)  M-P_nn_model.tex
 
 ReLU.pdf:
-	$(latex_imges)  ReLU.tex
+	$(latex_images)  ReLU.tex
 
 Sigmoid.pdf:
-	$(latex_imges)  Sigmoid.tex
+	$(latex_images)  Sigmoid.tex
 
 word2vec.pdf:
-	$(latex_imges)  word2vec.tex
+	$(latex_images)  word2vec.tex
+
+model.pdf:
+	$(latex_images) model.tex
 
 .PHONY: clean
 clean:

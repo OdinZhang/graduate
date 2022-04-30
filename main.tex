@@ -1,6 +1,6 @@
 \documentclass{hainanuthesis}
 
-\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+\newcommand{\overbar}[1]{\mkern1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern1.5mu}
 \newcommand{\overbari}[1]{\,\overline{\!{#1}}}
 \usepackage{subcaption}
 \usepackage{algorithm2e}
@@ -18,7 +18,7 @@
 
 \begin{document}
 % \maketitle
-\makecover
+\makecover{}
 
 \begin{abstract}
     这里是摘要
@@ -27,7 +27,7 @@
 
 \begin{abstract}[en]
     this is english abstract
-    \keywords[en]{CNN; CNN}
+    \keywords[en]{CNN; CNN} % chktex 13
 \end{abstract}
 
 \newpage
@@ -51,6 +51,6 @@
 \begin{acknowledge}
 \end{acknowledge}
 
-\printbib
+\printbib{}
 
 \end{document}
