@@ -25,7 +25,7 @@ He等人于2017年提出的NFM模型\cite{heNeuralFactorizationMachines2017}
 
 FM模型的二阶公式为：
 \begin{equation}
-    \hat{y}(\mathbf{x})=w_0+\sum_{i=1}^nw_ix_i+\sum_{i=1}^n\sum_{j=i+1}^n\langle\mathbf{v}_i,\mathbf{v}_j\rangle x_ix_j
+    \hat{y}(\mathbf{x})=w_0+\sum_{i=1}^n w_i x_i+\sum_{i=1}^n\sum_{j=i+1}^n\langle\mathbf{v}_i,\mathbf{v}_j\rangle x_i x_j
 \end{equation}
 
 模型中的参数应当有：
@@ -35,7 +35,7 @@ FM模型的二阶公式为：
 
 其中$\langle\cdot,\cdot\rangle$为两$k$阶向量的点积：
 \begin{equation}
-    \langle\mathbf{v}_i,\mathbf{v}_j\rangle=\sum_{f=1}^kv_{i,f}\cdot v_{j,f}
+    \langle\mathbf{v}_i,\mathbf{v}_j\rangle=\sum_{f=1}^k v_{i,f}\cdot v_{j,f}
 \end{equation}
 
 $\mathbf{v}_i$是矩阵$\mathbf{V}$的第$i$个$k$阶变量。
@@ -62,7 +62,7 @@ FM模型的计算复杂度为$O(kn^2)$，
         = & \frac{1}{2} \sum_{i=1}^{n} \sum_{j=1}^{n}\left\langle\mathbf{v}_{i}, \mathbf{v}_{j}\right\rangle x_{i} x_{j}-\frac{1}{2} \sum_{i=1}^{n}\left\langle\mathbf{v}_{i}, \mathbf{v}_{i}\right\rangle x_{i} x_{i} \\
         = & \frac{1}{2}\left(\sum_{i=1}^{n} \sum_{j=1}^{n} \sum_{f=1}^{k} v_{i, f} v_{j, f} x_{i} x_{j}-\sum_{i=1}^{n} \sum_{f=1}^{k} v_{i, f} v_{i, f} x_{i} x_{i}\right)                                             \\
         = & \frac{1}{2} \sum_{f=1}^{k}\left(\left(\sum_{i=1}^{n} v_{i, f} x_{i}\right)\left(\sum_{j=1}^{n} v_{j, f} x_{j}\right)-\sum_{i=1}^{n} v_{i, f}^{2} x_{i}^{2}\right)                                          \\
-        = & \frac{1}{2} \sum_{f=1}^{k}\left(\left(\sum_{i=1}^{n} v_{i, f} x_{i}\right)^{2}-\sum_{i=1}^{n} v_{i, f}^{2} x_{i}^{2}\right)
+        = & \frac{1}{2} \sum_{f=1}^{k}\left({\left(\sum_{i=1}^{n} v_{i, f} x_{i}\right)}^{2}- \sum_{i=1}^{n} v_{i, f}^{2} x_{i}^{2}\right)
     \end{aligned}
 \end{equation}
 

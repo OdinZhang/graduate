@@ -16,8 +16,7 @@ word2vec包含有两个模型，
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{images/word2vec.pdf}
-    \caption{word2vec模型}
-    \label{fig:word2vec}
+    \caption{word2vec模型}\label{fig:word2vec}
 \end{figure}
 
 \subsection{跳元模型}
@@ -67,7 +66,7 @@ $\mathbf{u}_{w_t}\in\mathbb{R}^d$
 给定上下文词$w_{O_1}, w_{O_2}, \ldots, w_{O_{2c}}$
 生成任意中心词$w_I$的条件概率可以表示为：
 \begin{equation}
-    P\left(w_I|w_{O_1}, \ldots, w_{O_{2c}}\right) = \frac{\exp\left(\frac{1}{2c}\mathbf{v}_I^T\left(\mathbf{u}_{O_1}+\ldots+\mathbf{u}_{O_{2c}}\right)\right)}{\sum_{w_t\in W}\exp\left(\frac{1}{2c}\mathbf{v}_{w_t}\left(\mathbf{u}_{O_1}+\ldots+\mathbf{u}_{O_{2c}}\right)\right)}
+    P\left(w_I|w_{O_1}, \ldots, w_{O_{2c}}\right) = \frac{\exp\left(\frac{1}{2c}\mathbf{v}_I^T\left(\mathbf{u}_{O_1}+\cdots+\mathbf{u}_{O_{2c}}\right)\right)}{\sum_{w_t\in W}\exp\left(\frac{1}{2c}\mathbf{v}_{w_t}\left(\mathbf{u}_{O_1}+\cdots+\mathbf{u}_{O_{2c}}\right)\right)}
 \end{equation}
 
 由此，
@@ -118,24 +117,24 @@ $X$和$Y$的并集，
 先验分布为：
 \begin{equation}
     \begin{aligned}
-        &P\left(C=1\right)=\frac{T_d}{T_d+T_n}\\
-        &P\left(C=0\right)=\frac{T_n}{T_d+T_n}
+         & P\left(C=1\right)=\frac{T_d}{T_d+T_n} \\
+         & P\left(C=0\right)=\frac{T_n}{T_d+T_n}
     \end{aligned}
 \end{equation}
 
 则根据全概率公式有：
 \begin{equation}
     \begin{aligned}
-        P\left(\mathbf{u}\right)&=P\left(\mathbf{u}|C=1;\theta\right)P\left(C=1\right)+P\left(\mathbf{u}|C=0\right)P\left(C=0\right)\\
-        &=p_m\left(\mathbf{u};\theta\right)\frac{T_d}{T_d+T_n}+p_n\left(\mathbf{u}\right)\frac{T_n}{T_d+T_n}
+        P\left(\mathbf{u}\right) & =P\left(\mathbf{u}|C=1;\theta\right)P\left(C=1\right)+P\left(\mathbf{u}|C=0\right)P\left(C=0\right) \\
+                                 & =p_m\left(\mathbf{u};\theta\right)\frac{T_d}{T_d+T_n}+p_n\left(\mathbf{u}\right)\frac{T_n}{T_d+T_n}
     \end{aligned}
 \end{equation}
 
 再根据贝叶斯公式有：
 \begin{equation}
     \begin{aligned}
-        P\left(C=1|\mathbf{u};\theta\right)&=\frac{P\left(\mathbf{u}|C=1;\theta\right)P\left(C=1\right)}{P\left(\mathbf{u}\right)}\\
-        &=\frac{p_m\left(\mathbf{u};\theta\right)}{p_m\left(\mathbf{u};\theta\right)+\frac{T_n}{T_d}p_n\left(\mathbf{u}\right)}
+        P\left(C=1|\mathbf{u};\theta\right) & =\frac{P\left(\mathbf{u}|C=1;\theta\right)P\left(C=1\right)}{P\left(\mathbf{u}\right)}                                 \\
+                                            & =\frac{p_m\left(\mathbf{u};\theta\right)}{p_m\left(\mathbf{u};\theta\right)+\frac{T_n}{T_d}p_n\left(\mathbf{u}\right)}
     \end{aligned}
 \end{equation}
 
@@ -143,8 +142,8 @@ $X$和$Y$的并集，
 \begin{equation}
     \label{eq:C_tL}
     \begin{aligned}
-        L\left(\theta\right)&=\sum_{t=1}^{T_d+T_n}\left[C_t\ln P\left(C_t=1|\mathbf{u}_t;\theta\right)+\left(1-C_t\right)\ln P\left(C_t=0|\mathbf{u}_t\right)\right]\\
-        &=\sum_{t=1}^{T_d}\ln\left[P\left(C=1|\mathbf{x}_t;\theta\right)\right]+\sum_{t=1}^{T_n}\ln\left[1-P\left(C=1|\mathbf{y}_t;\theta\right)\right]
+        L\left(\theta\right) & =\sum_{t=1}^{T_d+T_n}\left[C_t\ln P\left(C_t=1|\mathbf{u}_t;\theta\right)+\left(1-C_t\right)\ln P\left(C_t=0|\mathbf{u}_t\right)\right]        \\
+                             & =\sum_{t=1}^{T_d}\ln\left[P\left(C=1|\mathbf{x}_t;\theta\right)\right]+\sum_{t=1}^{T_n}\ln\left[1-P\left(C=1|\mathbf{y}_t;\theta\right)\right]
     \end{aligned}
 \end{equation}
 
@@ -162,8 +161,8 @@ $X$和$Y$的并集，
 \begin{equation}
     \label{eq:sigma}
     \begin{aligned}
-        P\left(D=1|w_I,w_O\right) &= \sigma\left(\mathbf{u}_O^T\mathbf{v}_I\right)\\
-        \sigma(x)&=\frac{1}{1+\exp(-x)}
+        P\left(D=1|w_I,w_O\right) & = \sigma\left(\mathbf{u}_O^T\mathbf{v}_I\right) \\
+        \sigma(x)                 & =\frac{1}{1+\exp(-x)}
     \end{aligned}
 \end{equation}
 

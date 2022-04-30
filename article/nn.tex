@@ -32,17 +32,14 @@
     \begin{minipage}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=0.95\textwidth]{images/Sigmoid.pdf}
-        \subcaption{Sigmoid}
-        \label{fig:sigmoid}
+        \subcaption{Sigmoid}\label{fig:sigmoid}
     \end{minipage}
     \begin{minipage}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=0.95\textwidth]{images/ReLU.pdf}
-        \subcaption{ReLU}
-        \label{fig:ReLu}
+        \subcaption{ReLU}\label{fig:ReLu}
     \end{minipage}
-    \caption{多图并排示例}
-    \label{fig:active-func}
+    \caption{多图并排示例}\label{fig:active-func}
 \end{figure}
 
 \subsection{优化算法}
@@ -82,7 +79,7 @@ $q$个隐层神经元，
 隐层第$h$个神经元的阈值为$\gamma_h$.
 记输入层第$i$个神经元与隐层第$h$个神经元的连接权为$v_{ih}$，
 隐层层第$h$个神经元与输出层第$j$个神经元的连接权为$w_{ih}$.
-记隐层第$h$个神经元接收到的输入为$\alpha_h=\sum_{i=1}^dv_{ih}x_i$，
+记隐层第$h$个神经元接收到的输入为$\alpha_h=\sum_{i=1}^d v_{ih}x_i$，
 输出层第$j$个神经元的输出为$\beta_j=\sum_{h=1}^{q}{w_{hj}b_h}$，
 $b_h$为隐层第$h$个神经元的输出.
 假设隐层和输出层都使用 Sigmoid 函数.
@@ -100,7 +97,7 @@ $b_h$为隐层第$h$个神经元的输出.
 
 \begin{equation}
     \label{eq:mse}
-    E_k=\frac{1}{2}\sum_{j=1}^l{\left(\hat{y}_l^k-y_j^k\right)^2}
+    E_k=\frac{1}{2}\sum_{j=1}^l{{\left(\hat{y}_l^k-y_j^k\right)}^2}
 \end{equation}
 
 根据\cref{eq:mse}，
@@ -148,14 +145,14 @@ $b_h$为隐层第$h$个神经元的输出.
 
 \begin{equation}
     \label{eq:whj}
-    \Delta w_{hj} = \eta g_jb_h
+    \Delta w_{hj} = \eta g_j b_h
 \end{equation}
 
 同理可得：
 
 \begin{align}
     \Delta\theta_j                   & = -\eta g_j   \\
-    \label{eq:vih}\Delta v_{ih}      & = \eta e_hx_i \\
+    \label{eq:vih}\Delta v_{ih}      & = \eta e_h x_i \\
     \label{eq:gammah}\Delta \gamma_h & = -\eta e_h
 \end{align}
 
@@ -174,7 +171,7 @@ $b_h$为隐层第$h$个神经元的输出.
 可以得到计算的算法如\cref{alg:nn}所示\cite{zhouzhihuaJiQiXueXi}.
 
 \begin{algorithm}
-    \KwIn{训练集$D=\left\{(x_k, y_k)\right\}^m_{k=1}$; 学习率$\eta$.}
+    \KwIn{训练集$D={\left\{(x_k, y_k)\right\}}^m_{k=1}$; 学习率$\eta$.}
     在$(0, 1)$范围内随机初始化网络中所有链接权和阈值\;
     \Repeat{达到停止条件}{
         \ForAll{$(\mathbf{x}_k, \mathbf{y}_k) \in D$}{
@@ -185,8 +182,7 @@ $b_h$为隐层第$h$个神经元的输出.
         }
     }
     \KwOut{连接权与阈值确定的多层前馈神经网络}
-    \caption{反向传播算法}
-    \label{alg:nn}
+    \caption{反向传播算法}\label{alg:nn}
 \end{algorithm}
 
 \subsubsection{Adam算法}
@@ -201,7 +197,7 @@ Adam算法结合了以上算法的优点，
 
 \begin{algorithm}
     \KwData{$\alpha$：步长}
-    \KwData{$\beta_1,\beta_2\in [0,1)$：非负加权参数}
+    \KwData{$\beta_1,\beta_2\in [0,1)$：非负加权参数} % chktex 9
     \KwData{$f(\theta)$：随机过程函数}
     \KwData{$\theta_0$：初始参数矢量}
     $m_0\leftarrow0$（初始化梯度动量）\;
@@ -217,8 +213,7 @@ Adam算法结合了以上算法的优点，
         $ \theta_{t} \leftarrow \theta_{t-1}-\alpha \cdot \widehat{m}_{t} /\left(\sqrt{\widehat{v}_{t}}+\epsilon\right) $（更新参数）\;
     }
     \KwOut{$\theta_t$}
-    \caption{Adam算法}
-    \label{alg:adam}
+    \caption{Adam算法}\label{alg:adam}
 \end{algorithm}
 
 虽然Adam算法成为了深度学习中最强大最有效的优化算法之一，
@@ -244,7 +239,7 @@ YOGI对Adam算法的重写如\cref{alg:yogi}所示。
 
 \begin{algorithm}
     \KwData{$\alpha$：步长}
-    \KwData{$\beta_1,\beta_2\in [0,1)$：非负加权参数}
+    \KwData{$\beta_1,\beta_2\in [0,1)$：非负加权参数} % chktex 9
     \KwData{$f(\theta)$：随机过程函数}
     \KwData{$\theta_0$：初始参数矢量}
     $m_0\leftarrow0$（初始化梯度动量）\;
@@ -260,8 +255,7 @@ YOGI对Adam算法的重写如\cref{alg:yogi}所示。
         $ \theta_{t} \leftarrow \theta_{t-1}-\alpha \cdot \widehat{m}_{t} /\left(\sqrt{\widehat{v}_{t}}+\epsilon\right) $（更新参数）\;
     }
     \KwOut{$\theta_t$}
-    \caption{YOGI算法}
-    \label{alg:yogi}
+    \caption{YOGI算法}\label{alg:yogi}
 \end{algorithm}
 
 \subsection{分类问题的处理}
@@ -270,4 +264,4 @@ YOGI对Adam算法的重写如\cref{alg:yogi}所示。
 可以对输出神经元设定阈值$k$与激活函数$f$，
 当输出值$\hat{y}>k\;(0\leqslant\hat{y}\leqslant1)$时，
 输出$1$，
-否则输出$0$.
+否则输出$0$. % chktex 17

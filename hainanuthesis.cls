@@ -4,6 +4,9 @@
 % 图片
 \RequirePackage{graphicx}
 
+% 表格
+\RequirePackage{booktabs}
+
 % 数学
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}

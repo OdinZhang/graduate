@@ -1,7 +1,6 @@
 \section{游戏推荐算法简介}
 
-自上世纪90年代中叶协同过滤算法的提出
-\cite{adomaviciusNextGenerationRecommender2005}，
+自上世纪90年代中叶协同过滤算法的提出\cite{adomaviciusNextGenerationRecommender2005}，
 使得推荐系统作为一门独立的学科被世人广泛且深入的研究。
 在此之后工业界和学术界都提出了一些新的推荐系统的算法。
 经过长期的发展，
@@ -21,8 +20,7 @@ $S$作为所有可作为推荐项目的集合。
     \forall c\in C,\; s_c'=\arg \max_{s\in S} u(c,s)
 \end{equation}
 
-传统的推荐算法通常被分类为以下几种类型
-\cite{canoHybridRecommenderSystems2017}：
+传统的推荐算法通常被分类为以下几种类型\cite{canoHybridRecommenderSystems2017}：
 \begin{itemize}
     \item 基于内容的推荐
     \item 基于协同过滤的推荐
@@ -52,8 +50,7 @@ $S$作为所有可作为推荐项目的集合。
 
 \subsection{基于协同过滤的推荐}
 
-协同过滤算法是Goldberg等人
-\cite{goldbergUsingCollaborativeFiltering1992}
+协同过滤算法是Goldberg等人\cite{goldbergUsingCollaborativeFiltering1992}
 在1992年提出的一种推荐算法。
 其目前为推荐算法当中较为主流的研究方向，
 同时也是应用较为广泛的推荐算法。
@@ -116,7 +113,7 @@ KBF可以用于推荐用户购买较少的复杂项目（例如汽车、房子�
 对于任意用户$u$，
 其对项目$i$的推荐度公式为：
 \begin{equation}
-    f(u,i)=\sum_{j=1}^n\alpha_jf_j(u,i)
+    f(u,i)=\sum_{j=1}^n\alpha_j f_j(u,i)
 \end{equation}
 
 其中$f_j(u,i)$为不同的推荐算法，
@@ -148,11 +145,11 @@ $\beta_j(u,i)$为相应场景中的对应方法的优劣层级。
 通过逐步筛选候选结果以得到高精确度的结果，
 其公式为：
 \begin{equation}
-    f(u,i)=g\left(\sum_{j=1}^n\lambda_jf_j(u,i)\right)
+    f(u,i)=g\left(\sum_{j=1}^n\lambda_j f_j(u,i)\right)
 \end{equation}
 
 其中$g(\cdot)$为外层推荐算法，
-$\sum_{j=1}^n\lambda_jf_j(u,i)$为前一级推荐结果，
+$\sum_{j=1}^n\lambda_j f_j(u,i)$为前一级推荐结果，
 $\lambda_j$代表前一级权重。
 通常在设计时，
 会将便于计算、
@@ -172,8 +169,7 @@ $\lambda_j$代表前一级权重。
 
 \subsection{常用相似度算法简介}
 
-相似度的计算主要可以分为以下三种
-\cite{heJiYuJuanJiShenJingWangLuoDeYinLeTuiJianXiTong2019}：
+相似度的计算主要可以分为以下三种\cite{heJiYuJuanJiShenJingWangLuoDeYinLeTuiJianXiTong2019}：
 \begin{itemize}
     \item 欧几里得距离
     \item 余弦相似度
@@ -188,7 +184,7 @@ $\lambda_j$代表前一级权重。
 假设$x$和$y$是$n$维欧氏空间中的两点，
 则其欧氏距离为：
 \begin{equation}
-    d(x,y)=\sqrt{\sum_{i=1}^n\left(x_i-y_i\right)^2}
+    d(x,y)=\sqrt{ \sum_{i=1}^n {\left( x_i - y_i \right)}^2}
 \end{equation}
 
 当使用欧氏距离计算相似度时可以使用公式\cref{eq:o2sim}来进行转换。
@@ -212,7 +208,7 @@ $\lambda_j$代表前一级权重。
 \begin{equation}
     s(\mathbf{x},\mathbf{y})=
     \frac{\mathbf{x}\cdot\mathbf{y}}{\lVert\mathbf{x}\rVert\lVert\mathbf{y}\rVert}
-    =\frac{\sum_{i=1}^nx_iy_i}{\sqrt{\sum_{i=1}^n\left(x_i\right)^2}\sqrt{\sum_{i=1}^n\left(y_i\right)^2}}
+    =\frac{\sum_{i=1}^n x_i y_i} {\sqrt{\sum_{i=1}^n{\left(x_i\right)}^2} \sqrt{\sum_{i=1}^n{\left(y_i\right)}^2}}
 \end{equation}
 
 \subsubsection{皮尔逊相关系数}
@@ -225,5 +221,5 @@ $\lambda_j$代表前一级权重。
 则认为二者间相似度越高。
 Pearson相关系数计算公式定义为：
 \begin{equation}
-    r=\frac{\sum_{i=1}^n\left(X_i-\overbari{X}\right)\left(Y_i-\overbar{Y}\right)}{\sqrt{\sum_{i=1}^n\left(X_i-\overbari{X}\right)^2}\sqrt{\sum_{i=1}^n\left(Y_i-\overbar{Y}\right)^2}}
+    r=\frac{\sum_{i=1}^n\left(X_i-\overbari{X}\right)\left(Y_i-\overbar{Y}\right)}{\sqrt{\sum_{i=1}^n{\left(X_i-\overbari{X}\right)}^2}\sqrt{\sum_{i=1}^n{\left(Y_i-\overbar{Y}\right)}^2}}
 \end{equation}
