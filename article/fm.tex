@@ -2,9 +2,9 @@
 
 因子分解机（Factorization Machines，FM）
 是由Rendle等人于2010年提出的一种基于矩阵分解的
-一种机器学习算法。
+一种机器学习算法.
 其主要将支持向量机（SVM）的优势与因子分解模型相结合，
-旨在对极为稀疏的数据进行处理。
+旨在对极为稀疏的数据进行处理.
 
 总的来说，FM的优势主要在于\cite{rendleFactorizationMachines2010}：
 \begin{itemize}
@@ -15,11 +15,11 @@
 
 FM在提出之后获得了大量的关注，
 同样地，
-也衍生出了许多的变体。
+也衍生出了许多的变体.
 比如Guo等人于2017年提出的DeepFM模型\cite{guoDeepFMFactorizationMachineBased2017}，
 Juan等人于2016年提出的FFM模型\cite{juanFieldawareFactorizationMachines2016}，
 He等人于2017年提出的NFM模型\cite{heNeuralFactorizationMachines2017}
-等。
+等.
 
 \subsection{FM原理}
 
@@ -38,14 +38,14 @@ FM模型的二阶公式为：
     \langle\mathbf{v}_i,\mathbf{v}_j\rangle=\sum_{f=1}^k v_{i,f}\cdot v_{j,f}
 \end{equation}
 
-$\mathbf{v}_i$是矩阵$\mathbf{V}$的第$i$个$k$阶变量。
-$k\in\mathbb{N}_0^+$为定义了因子维度的一个超参数。
+$\mathbf{v}_i$是矩阵$\mathbf{V}$的第$i$个$k$阶变量.
+$k\in\mathbb{N}_0^+$为定义了因子维度的一个超参数.
 
 对于二阶FM而言，
 $w_0$为全局偏置量，
 $w_i$则为第$i$个变量的权重，
 $\hat{w}_{i,j}=\langle\mathbf{v}_i,\mathbf{v}_j\rangle$
-为第$i$和第$j$个变量的互作用。
+为第$i$和第$j$个变量的互作用.
 
 \subsection{FM模型计算优化}
 
@@ -53,7 +53,7 @@ $\hat{w}_{i,j}=\langle\mathbf{v}_i,\mathbf{v}_j\rangle$
 FM模型的计算复杂度为$O(kn^2)$，
 其对于大规模数据的计算不够友好，
 较为消耗计算资源，
-因此需要对其进行优化。
+因此需要对其进行优化.
 
 对于模型定义中的后半部分，可以得出：
 \begin{equation}
@@ -66,4 +66,4 @@ FM模型的计算复杂度为$O(kn^2)$，
     \end{aligned}
 \end{equation}
 
-经过上述变换之后模型的计算复杂度将为$O(kn)$。
+经过上述变换之后模型的计算复杂度将为$O(kn)$.

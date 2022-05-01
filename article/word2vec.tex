@@ -1,17 +1,17 @@
 \section{Word2Vec词嵌入模型简介}
 
 Word2Vec是一种比较流行的词嵌入的方法，
-通过将单词转换为定长的向量以方便进行计算。
+通过将单词转换为定长的向量以方便进行计算.
 相对于One-Hot编码来说，
 没有了过于稀疏的问题，
-同时也可以更好地表达词与词之间的相似或类比关系。
+同时也可以更好地表达词与词之间的相似或类比关系.
 
 Word2Vec包含有两个模型，
 即跳元模型\cite{mikolovDistributedRepresentationsWords2013}
 （Skip-gram）
 与连续词袋模型\cite{mikolovEfficientEstimationWord2013}
 （Continuous Bag of Words），
-模型结构如\cref{fig:Word2Vec}所示。
+模型结构如\cref{fig:Word2Vec}所示.
 
 \begin{figure}[!htbp]
     \centering
@@ -23,7 +23,7 @@ Word2Vec包含有两个模型，
 
 假设一个单词序列$W = \left\{w_1, w_2, w_3, \ldots, w_T\right\}$，
 中心词为$w_t$，
-上下文窗口为$2$。
+上下文窗口为$2$.
 则给定中心词$w_t$，
 生成上下文词$w_{t-2}, w_{t-1}, w_{t+1}, w_{t+2}$的条件概率为：
 \begin{equation}
@@ -39,7 +39,7 @@ Word2Vec包含有两个模型，
 
 令$\mathbf{v}_{w_t}\in\mathbb{R}^d$和
 $\mathbf{u}_{w_t}\in\mathbb{R}^d$
-表示$w_t$分别作为中心词和上下文词时的两个$d$维向量。
+表示$w_t$分别作为中心词和上下文词时的两个$d$维向量.
 给定中心词$w_I$，
 生成的上下文词$w_O$
 的条件概率可以通过softmax函数定义：
@@ -54,15 +54,15 @@ $\mathbf{u}_{w_t}\in\mathbb{R}^d$
     \frac{1}{T}\sum^T_{t=1}\sum_{-c\leqslant j\leqslant c, j\neq 0}\log P\left(w_{t+j}|w_t\right)
 \end{equation}
 
-其中$c$为上下文窗口的大小。
+其中$c$为上下文窗口的大小.
 
 \subsection{连续词袋模型}
 
 连续词袋模型存在多个上下文词，
-故需要在计算条件概率时对上下文词向量进行平均。
+故需要在计算条件概率时对上下文词向量进行平均.
 即令$\mathbf{v}_{w_t}\in\mathbb{R}^d$和
 $\mathbf{u}_{w_t}\in\mathbb{R}^d$
-表示$w_t$分别作为中心词和上下文词时的两个$d$维向量。
+表示$w_t$分别作为中心词和上下文词时的两个$d$维向量.
 给定上下文词$w_{O_1}, w_{O_2}, \ldots, w_{O_{2c}}$
 生成任意中心词$w_I$的条件概率可以表示为：
 \begin{equation}
@@ -80,18 +80,18 @@ $\mathbf{u}_{w_t}\in\mathbb{R}^d$
 由于softmax计算的特性，
 需要对词表中的每一项都进行计算，
 由此可能会造成梯度的计算过于复杂，
-影响模型的训练效率。
+影响模型的训练效率.
 因此，
 我们将引入两种近似训练方法：
-负采样和分层softmax。
+负采样和分层softmax.
 由于两种模型的相似性，
-本文仅以跳元模型为例进行说明。
+本文仅以跳元模型为例进行说明.
 
 \subsubsection{噪声对比估计NCE}
 
 NCE是Gutmann等人在2010年\cite{gutmannNoisecontrastiveEstimationNew2010}
 处理非归一化模型时提出的一种参数估计原理，
-以简化对归一化因子的计算。
+以简化对归一化因子的计算.
 
 假设集合$U=\left(\mathbf{u}_1, \ldots, \mathbf{u}_{2T}\right)$是集合
 $X$和$Y$的并集，
@@ -149,15 +149,15 @@ $X$和$Y$的并集，
 
 由于\cref{eq:C_tL}与交叉熵函数的相似性，
 我们可以使用逻辑回归来对模型进行学习，
-从而利用相关算法达到简化计算的目的。
+从而利用相关算法达到简化计算的目的.
 
 \subsubsection{负采样NEG}
 
 负采样实际上是NEC的一种特殊情况，
-即使$\frac{T_n}{T_d}p_n\left(\mathbf{u}\right)=1$。
+即使$\frac{T_n}{T_d}p_n\left(\mathbf{u}\right)=1$.
 把给定中心词$w_I$，
 生成的上下文词$w_O$被认为是由\cref{eq:sigma}
-建模的概率事件。
+建模的概率事件.
 \begin{equation}
     \label{eq:sigma}
     \begin{aligned}
@@ -167,5 +167,5 @@ $X$和$Y$的并集，
 \end{equation}
 
 同理，
-可以得出相应的对数损失函数。
+可以得出相应的对数损失函数.
 % TODO 此处应算出相应的损失函数

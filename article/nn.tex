@@ -45,10 +45,10 @@
 \subsection{优化算法}
 
 通常我们会引入损失函数来衡量
-神经网络的预测结果和真实结果之间的差距。
+神经网络的预测结果和真实结果之间的差距.
 一旦拥有了损失函数，
 我们便尽可能的使其结果尽可能小来进行尽可能准确的预测，
-因此我们便可以使用优化算法来最小化损失。
+因此我们便可以使用优化算法来最小化损失.
 在神经网络中常用的优化算法有：
 梯度下降算法、
 随机梯度下降算法、
@@ -57,10 +57,10 @@
 AdaGrad算法、
 RMSProp算法、
 Adadelta算法、
-Adam算法等等。
+Adam算法等等.
 受限于篇幅限制，
 本文将着重介绍较为常用的梯度下降算法的实现---
-反向传播算法与Adam算法。
+反向传播算法与Adam算法.
 
 \subsubsection{反向传播算法}
 
@@ -191,9 +191,9 @@ $b_h$为隐层第$h$个神经元的输出.
 BP算法对于优化速度等方面逐渐不能满足于训练的需要，
 使用随机梯度下降算法比仅仅使用梯度下降算法更加有效，
 AdaGrad算法对于稀疏梯度的处理更加有效\cite{duchiAdaptiveSubgradientMethods2011}，
-RMSProp算法在在线和非平稳环境下表现更好\cite{tielemanLecture5rmspropDivide2012}。
+RMSProp算法在在线和非平稳环境下表现更好\cite{tielemanLecture5rmspropDivide2012}.
 Adam算法结合了以上算法的优点，
-其具体实现参照\cref{alg:adam}\cite{kingmaAdamMethodStochastic2017}。
+其具体实现参照\cref{alg:adam}\cite{kingmaAdamMethodStochastic2017}.
 
 \begin{algorithm}
     \KwData{$\alpha$：步长}
@@ -222,7 +222,7 @@ Adam算法结合了以上算法的优点，
 指出Adam算法在某些情况下存在无法收敛的情况，
 因此，
 我们可以使用YOGI\cite{zaheerAdaptiveMethodsNonconvex2018}
-来进行热修复。
+来进行热修复.
 
 Adam算法中对于$v_t$的更新为：
 \begin{equation}
@@ -235,7 +235,7 @@ YOGI算法则建议我们将其修改为：
 \end{equation}
 
 因此，
-YOGI对Adam算法的重写如\cref{alg:yogi}所示。
+YOGI对Adam算法的重写如\cref{alg:yogi}所示.
 
 \begin{algorithm}
     \KwData{$\alpha$：步长}
