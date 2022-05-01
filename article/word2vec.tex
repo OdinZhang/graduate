@@ -1,22 +1,22 @@
-\section{word2vec词嵌入模型简介}
+\section{Word2Vec词嵌入模型简介}
 
-word2vec是一种比较流行的词嵌入的方法，
+Word2Vec是一种比较流行的词嵌入的方法，
 通过将单词转换为定长的向量以方便进行计算。
 相对于One-Hot编码来说，
 没有了过于稀疏的问题，
 同时也可以更好地表达词与词之间的相似或类比关系。
 
-word2vec包含有两个模型，
+Word2Vec包含有两个模型，
 即跳元模型\cite{mikolovDistributedRepresentationsWords2013}
 （Skip-gram）
 与连续词袋模型\cite{mikolovEfficientEstimationWord2013}
 （Continuous Bag of Words），
-模型结构如\cref{fig:word2vec}所示。
+模型结构如\cref{fig:Word2Vec}所示。
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=0.8\textwidth]{images/word2vec.pdf}
-    \caption{word2vec模型}\label{fig:word2vec}
+    \includegraphics[width=0.8\textwidth]{images/Word2Vec.pdf}
+    \caption{Word2Vec模型}\label{fig:Word2Vec}
 \end{figure}
 
 \subsection{跳元模型}

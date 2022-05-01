@@ -21,13 +21,66 @@
 \makecover{}
 
 \begin{abstract}
-    这里是摘要
-    \keywords{CNN；卷积神经网络}
+    近年来，
+    尤其是在COIVID-19的影响下，
+    游戏产业愈发地繁荣。
+    同时，
+    游戏的数量也越来越多，
+    如何从海量的游戏内容当中获取到用户喜爱的游戏，
+    成为了游戏产业当中越来越重要的一项议题。
+
+    本文介绍了融合了FM、
+    Word2Vec以及神经网络相关技术的一种新型游戏推荐技术，
+    以期对Steam游戏进行相关的推荐。
+    主要是将稀疏数据进行嵌入之后分别交由FM处理和直接输出，
+    对于标签数据则使用Word2Vec进行Tag2Vec的学习，
+    与进行嵌入后的稀疏数据以及稠密数据连接后
+    交由深度学习模块进行训练。
+    考虑到计算性能以及防止过拟合，
+    各全连接层之间均使用ReLU作为激活函数，
+    最终使用二分类交叉熵损失（BCE）作为损失函数。
+    具体的训练模型设计详见\cref{fig:model}。
+
+    经过实验表明本文的模型具有一定的可行性以及有效性，
+    最终给出了该模型后续所面临的困难以及接下来的研究方向。
+    \keywords{FM；Word2Vec；深度学习；推荐系统；电子游戏}
 \end{abstract}
 
+\newpage
+
 \begin{abstract}[en]
-    this is english abstract
-    \keywords[en]{CNN; CNN} % chktex 13
+    These years,
+    especially under the influence of COVID-19,
+    more and more video games are springing up.
+    How to recommend users' favorite game is becoming
+    more and more important.
+
+    This thesis mainly introduce a new recommendation technology,
+    including FM, Word2Vec and deep learning.
+    The tech is designed for vedio games of Steam,
+    a game platform.
+    Firstly,
+    putting the sparse data into the embedding layer,
+    then putting into FM layer.
+    Secondly,
+    putting the tags into Word2Vec machine and
+    contact the result with dense data and
+    the result of embedding layer.
+    Finally,
+    make sure all of the data can be trained by
+    the deep learning machine.
+    To avoid over-fitting,
+    we choose ReLU between the full connection layer,
+    or linear layer.
+    What's more,
+    BCE is the loss function.
+    This design can also be learnt in figure 4.
+
+    The model is proved available and validated.
+    At the end of this thesis,
+    we pointed out the difficulty and
+    the direction of the future for further research.
+    \keywords[en]{FM; Word2Vec; Deep learning; recommendation system; video games} % chktex 13
 \end{abstract}
 
 \newpage
