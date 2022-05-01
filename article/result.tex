@@ -178,3 +178,23 @@ Word2Vec模块主要在预训练阶段把标签数据进行训练，
 
 此时可以看到采用Sigmoid作为激活函数与
 BCE作为损失函数所得到的梯度值正比于预测值与真实值之差。
+
+\subsection{结果分析}
+
+如前文所述，
+对数据集进行训练可以得到训练的结果如\cref{fig:loss}所示。
+
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=.7\textwidth]{images/loss.pdf}
+	\caption{模型损失率曲线}\label{fig:loss}
+\end{figure}
+
+由图所示，
+伴随迭代周期的增加，
+模型的平均损失率在不断减小，
+在大约$20$次时趋于收敛。
+在第$100$次左右时损失率已经接近$0.17$。
+可以看出基本符合预期要求，
+同时模型的准确率也能维持在90\%以上的水平，
+满足对于推荐所需要的准确率。
