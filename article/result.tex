@@ -80,9 +80,9 @@ Word2Vec相较于FM等算法其计算性能较高，
 对于模型的设计见\cref{fig:model}。
 
 \begin{figure}[!htbp]
-    \centering
-    \includegraphics[width=.9\textwidth]{images/model.pdf}
-    \caption{模型设计}\label{fig:model}
+	\centering
+	\includegraphics[width=.9\textwidth]{images/model.pdf}
+	\caption{模型设计}\label{fig:model}
 \end{figure}
 
 \subsubsection{FM模块设计}
@@ -94,9 +94,9 @@ FM模块主要将离散数据分别交给嵌入层和全连接层进行处理，
 模块的设计主要见\cref{fig:fm}
 
 \begin{figure}[!htbp]
-    \centering
-    \includegraphics[width=.9\textwidth]{images/fm.pdf}
-    \caption{FM模块设计}\label{fig:fm}
+	\centering
+	\includegraphics[width=.9\textwidth]{images/fm.pdf}
+	\caption{FM模块设计}\label{fig:fm}
 \end{figure}
 
 \subsubsection{Word2Vec模块设计}
@@ -122,7 +122,50 @@ Word2Vec模块主要在预训练阶段把标签数据进行训练，
 网络的设计可见\cref{fig:deep}。
 
 \begin{figure}[!htbp]
-    \centering
-    \includegraphics[width=.9\textwidth]{images/deep.pdf}
-    \caption{深度神经网络模块设计}\label{fig:deep}
+	\centering
+	\includegraphics[width=.9\textwidth]{images/deep.pdf}
+	\caption{深度神经网络模块设计}\label{fig:deep}
 \end{figure}
+
+\subsection{评价指标}
+
+为了评价建立模型的优劣，
+需要建立一个相应的评价体系。
+对于本文而言，
+其推荐质量的评价主要是通过
+对给定数据产生推荐结果的准确性实现。
+
+该推荐算法对游戏的预测主要是对游戏评分的预测，
+算法根据用户对游戏评分的多少进行相应的推荐。
+因此，
+需要一种算法来衡量算法预测评分和用户真实评分的
+一种评价指标。
+通常的评价指标有：
+均方误差损失、
+平均绝对值误差损失、
+交叉熵损失、
+负对数似然函数损失等等。
+鉴于该问题适用于二分类问题
+（用户评分只有推荐与否），
+因此为避免类似于均方误差损失等带来的梯度消失等一系列问题，
+因此采用二分类交叉熵损失（BCE）。
+其计算公式为：
+\begin{equation}
+	L=-\sum_{i=1}^{N}\left[y_{i} \ln \left(\sigma\left(x_{i}\right)\right)+\left(1-y_{i}\right) \ln \left(1-\sigma\left(x_{i}\right)\right)\right]
+\end{equation}
+
+此时有：
+\begin{equation}
+	\begin{aligned}
+		\frac{d L}{d x_{i}} & =\frac{d L}{d \sigma\left(x_{i}\right)} \cdot \frac{d \sigma\left(x_{i}\right)}{d x_{i}}                                                                                         \\
+		                    & =-\left[\frac{y_{i}}{\sigma\left(x_{i}\right)}+\left(1-y_{i}\right) \frac{-1}{1-\sigma\left(x_{i}\right)}\right] \sigma\left(x_{i}\right)\left(1-\sigma\left(x_{i}\right)\right) \\
+		                    & =\left(\frac{1-y_{i}}{1-\sigma\left(x_{i}\right)}-\frac{y_{i}}{\sigma\left(x_{i}\right)}\right) \sigma\left(x_{i}\right)\left(1-\sigma\left(x_{i}\right)\right)                  \\
+		                    & =\left(1-y_{i}\right) \sigma\left(x_{i}\right)-y_{i}\left(1-\sigma\left(x_{i}\right)\right)                                                                                      \\
+		                    & =\sigma\left(x_{i}\right)-y_{i}
+	\end{aligned}
+\end{equation}
+
+其中$ \sigma(x)=\frac{1}{1+e^{-x}} $。
+
+此时可以看到采用Sigmoid作为激活函数与
+BCE作为损失函数所得到的梯度值正比于预测值与真实值之差。
