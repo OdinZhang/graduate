@@ -1,7 +1,7 @@
 latex = latexmk --synctex=1 --interaction=nonstopmode --file-line-error --pdf --xelatex
 latex_images = latexmk --synctex=1 --interaction=nonstopmode --file-line-error --pdf --xelatex --outdir=./images
 
-all: M-P_nn_model.pdf ReLU.pdf Sigmoid.pdf word2vec.pdf model.pdf
+all: M-P_nn_model.pdf ReLU.pdf Sigmoid.pdf word2vec.pdf model.pdf fm.pdf deep.pdf
 	$(latex) main.tex
 
 M-P_nn_model.pdf:
@@ -18,6 +18,12 @@ word2vec.pdf:
 
 model.pdf:
 	$(latex_images) model.tex
+
+fm.pdf:
+	$(latex_images) fm.tex
+
+deep.pdf:
+	$(latex_images) deep.tex
 
 .PHONY: clean
 clean:

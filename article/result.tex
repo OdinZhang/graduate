@@ -73,7 +73,7 @@ Word2Vec相较于FM等算法其计算性能较高，
 稠密数据、
 标签数据。
 稀疏数据主要通过FM进行特征提取，
-标签数据则通过Word2Vec进行处理，
+标签数据则通过Word2Vec进行特征提取，
 最终将三者通过全连接层连接，
 之后使用深度神经网络进行处理并得到结果，
 最终与用户打分进行比较。
@@ -87,6 +87,42 @@ Word2Vec相较于FM等算法其计算性能较高，
 
 \subsubsection{FM模块设计}
 
+FM模块主要将离散数据分别交给嵌入层和全连接层进行处理，
+其中全连接层输出神经元为$1$，
+之后将嵌入层的数据交由FM层处理后与线性层结果相加，
+最后与嵌入层的数据拼接后输出。
+模块的设计主要见\cref{fig:fm}
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=.9\textwidth]{images/fm.pdf}
+    \caption{FM模块设计}\label{fig:fm}
+\end{figure}
+
 \subsubsection{Word2Vec模块设计}
 
+Word2Vec模块主要在预训练阶段把标签数据进行训练，
+对于数据集中的风格、
+标签、
+类型等信息分别进行训练，
+并得出维度为$50$的向量，
+对每一相应的标签数据对应的向量相加，
+将其作为相应的向量，
+拼接后作为输出。
+
 \subsubsection{深度神经网络模块设计}
+
+深度神经网络模块的输入数据为$454$维，
+首先将数据通过输出为$454$维的全连接层进行训练，
+之后通过维度为$150$的全连接层训练，
+第三层则为输出为$50$维的全连接层，
+第四层和第五层全连接层的输出维度为$10$和$1$，
+其中全连接层之间的激活函数均为ReLU，
+第五层和输出间的激活函数为Sigmoid。
+网络的设计可见\cref{fig:deep}。
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=.9\textwidth]{images/deep.pdf}
+    \caption{深度神经网络模块设计}\label{fig:deep}
+\end{figure}

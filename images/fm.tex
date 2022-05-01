@@ -1,0 +1,23 @@
+\documentclass[margin=2mm]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{fit}
+
+\begin{document}
+\begin{tikzpicture}
+    \node[draw, fit={(0,0) (15,1)}, label=center:{Sparse Data}] (sd) {};
+
+    \node[draw, fit={(6,2) (9,3)}, label=center:{Embedding}] (ed) {};
+
+    \node[draw, fit={(0,4) (4,5)}, label=center:{FM Layer}] (fl) {};
+    \node[draw, fit={(10.5,4) (15,5)}, label=center:{Linear Layer (1)}] (ll) {};
+
+    \node[draw, fit={(0,6) (15,7)}, label=center:{Output}] (o) {};
+
+    \draw[->] (sd) -- (ed);
+    \draw[->] (ed) -- (fl);
+    \draw[->] (ed) -- (o);
+    \draw[->] (sd) -- (ll);
+    \draw[->] (fl) -- (o);
+    \draw[->] (ll) -- (o);
+\end{tikzpicture}
+\end{document}
