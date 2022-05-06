@@ -127,8 +127,8 @@
 	\section*{\begin{center}{\zihao{3}\textbf{#1}}\end{center}}%
 	\markboth{#1}{#1}}
 \newcommand{\printbib}{
+	\addcontentsline{toc}{section}{参考文献} % TODO 初步修复，对于换页还是会出错
 	\printbibliography[title={参考文献}]
-	\addcontentsline{toc}{section}{参考文献}
 }
 
 % 附件
