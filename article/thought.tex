@@ -33,3 +33,30 @@
 因此需要一种新的算法来进行优化，
 以尽可能减少计算资源。
 
+\subsection{算法改进}
+
+考虑到DeepFM对标签类型数据需要当作大量OneHot编码，
+使得数据过于稀疏，
+同时模型的复杂度过高，
+不便于进行计算。
+因此，
+对于标签数据的嵌入层部分选择使用Word2Vec进行词嵌入。
+词嵌入部分可以作为预训练部分进行处理，
+同时其训练速度非常快，
+对计算资源的占用不高。
+对于稀疏数据，
+选择将与DeepFM类似的方法，
+将嵌入层数据交由FM与线性层分别处理，
+并将其与嵌入层数据一并输出，
+最终将Word2Vec、连续数据与词嵌入数据一并使用
+神经网络进行训练，
+最终进行输出。
+算法的大概框架如\cref{fig:model}所示。
+
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=.9\textwidth]{images/model.pdf}
+	\caption{模型设计}\label{fig:model}
+\end{figure}
+
+算法的具体设计可见\cref{sec:design}.

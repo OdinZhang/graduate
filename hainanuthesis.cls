@@ -94,6 +94,10 @@
 
 \crefformat{algorithm}{#2算法#1#3}
 
+\crefformat{section}{#2#1#3~节}
+\crefformat{subsection}{#2#1#3~节}
+\crefformat{subsubsection}{#2#1#3~节}
+
 \RequirePackage{caption}
 \DeclareCaptionFont{song}{\songti}
 \DeclareCaptionFont{five}{\zihao{5}}
