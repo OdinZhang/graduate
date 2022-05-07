@@ -27,6 +27,88 @@
 	\end{center}
 \end{table}
 
+\subsubsection{数据的展示}
+
+该数据集主要有五个文件，
+分别为澳大利亚用户评论，
+澳大利亚用户项目，
+合集数据、
+Steam游戏数据以及Steam用户评论数据，
+均使用Json文件。
+本文将仅使用澳大利亚用户相关数据以及游戏相关数据进行训练。
+
+澳大利亚用户评论数据格式不完整展示为：
+\begin{minted}[linenos,
+		numbersep=5pt,
+		frame=lines,
+		framesep=2mm]{json}
+{
+  "reviews": [
+    {
+      "funny": "",
+      "helpful": "No ratings yet",
+      "review": "It's unique and worth a playthrough.",
+      "recommend": true,
+      "item_id": "22200",
+      "last_edited": "",
+      "posted": "Posted July 15, 2011."
+    },
+  ],
+  "user_id": "76561197970982479",
+  "user_url": "http://steamcommunity.com/profiles/
+                                    76561197970982479"
+}
+\end{minted}
+
+澳大利亚用户项目数据格式不完整展示为：
+\begin{minted}[linenos,
+    numbersep=5pt,
+    frame=lines,
+    framesep=2mm]{json}
+{
+  "steam_id": "76561197970982479",
+  "items": [
+    {
+      "item_id": "10",
+      "item_name": "Counter-Strike",
+      "playtime_2weeks": 0,
+      "playtime_forever": 6
+    },
+  ],
+  "items_count": 277,
+  "user_id": "76561197970982479",
+  "user_url": "http://steamcommunity.com/profiles/
+                                    76561197970982479"
+}
+\end{minted}
+
+游戏数据格式不完整展示为：
+\begin{minted}[linenos,
+    numbersep=5pt,
+    frame=lines,
+    framesep=2mm]{json}
+{
+  "publisher": "Kotoshiro",
+  "genres": ["Action", "Casual", "Indie", "Simulation", 
+                                                "Strategy"],
+  "app_name": "Lost Summoner Kitty",
+  "title": "Lost Summoner Kitty",
+  "url": "http://store.steampowered.com/app/761140/
+                                        Lost_Summoner_Kitty/",
+  "release_date": "2018-01-04",
+  "tags": ["Strategy", "Action", "Indie", "Casual", 
+                                                "Simulation"],
+  "discount_price": 4.49,
+  "reviews_url": "http://steamcommunity.com/app/761140/
+                        reviews/?browsefilter=mostrecent&p=1",
+  "id": "761140",
+  "price": 4.99,
+  "early_access": false,
+  "specs": ["Single-player"],
+  "developer": "Kotoshiro"
+}
+\end{minted}
+
 \subsubsection{数据集的预处理}
 
 由于数据集分别包含了评论数据、
@@ -37,6 +119,35 @@
 选择将澳大利亚的用户数据、
 澳大利亚用户评论数据、
 游戏数据进行内连接.
+
+处理之后用于训练的数据不完整展示为：
+\begin{minted}[linenos,
+    numbersep=5pt,
+    frame=lines,
+    framesep=2mm]{json}
+{
+  "game_publisher": "Tripwire Interactive",
+  "game_genres": ["Action"],
+  "game_name": "Killing Floor",
+  "game_title": "Killing Floor",
+  "game_release_date": "2009-05-14",
+  "game_tags": [
+    "FPS", "Zombies", "Co-op",
+  ],
+  "game_id": "1250",
+  "game_price": 19.99,
+  "game_earlt_access": false,
+  "game_specs": [
+    "Single-player", "Multi-player", "Co-op",
+  ],
+  "game_dev": "Tripwire Interactive",
+  "user_id": "76561197970982479",
+  "user_steam_id": "76561197970982479",
+  "user_items_count": 277,
+  "rec": true,
+  "review_posted": "Posted November 5, 2011."
+}
+\end{minted}
 
 鉴于数据集中有一定数据的缺失，
 选择将例如游戏制造商、
@@ -109,7 +220,8 @@ Word2Vec模块主要在预训练阶段把标签数据进行训练，
 之后通过维度为$150$的全连接层训练，
 第三层则为输出为$50$维的全连接层，
 第四层和第五层全连接层的输出维度为$10$和$1$，
-其中全连接层之间的激活函数均为ReLU，
+为了优化计算性能以及获得较好的训练效果，
+全连接层之间的激活函数均选择使用为ReLU，
 第五层和输出间的激活函数为Sigmoid.
 网络的设计可见\cref{fig:deep}.
 

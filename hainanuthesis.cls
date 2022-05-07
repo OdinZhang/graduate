@@ -1,6 +1,9 @@
 \ProvidesClass{hainanuthesis}
 \LoadClass[linespread=1.5,a4paper,zihao=-4,fontset=windows]{ctexart}
 
+% 代码高亮
+\RequirePackage{minted}
+
 % 图片
 \RequirePackage{graphicx}
 
