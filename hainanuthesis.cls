@@ -128,7 +128,7 @@
 }{\null}
 
 % 参考文献
-\RequirePackage[style=gb7714-2015]{biblatex}
+\RequirePackage[style=hainanu]{biblatex}
 \renewcommand{\bibfont}{\zihao{5}}
 \defbibheading{bibliography}[\bibname]{%
 	\section*{\begin{center}{\zihao{3}\textbf{#1}}\end{center}}%
