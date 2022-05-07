@@ -59,131 +59,7 @@ RMSProp算法、
 Adadelta算法、
 Adam算法等等.
 受限于篇幅限制，
-本文将着重介绍较为常用的梯度下降算法的实现---
-反向传播算法与Adam算法.
-
-\subsubsection{反向传播算法}
-
-由于多层网络的学习能力通常要强于单层感知机，
-因此，
-需要一种更加强大的算法.
-最常用的就是反向传播算法（BP算法），
-其不仅可以用于多层前馈神经网络，
-同样可以用于诸如递归神经网络等其余类型的网络.
-通常情况下“BP 神经网络”指使用 BP 算法训练的多层前馈神经网络.
-
-假定一个前馈神经网络具有$d$个输入神经元，
-$l$个输出神经元，
-$q$个隐层神经元，
-其中输出层第$j$个神经元的阈值为$\theta_j$，
-隐层第$h$个神经元的阈值为$\gamma_h$.
-记输入层第$i$个神经元与隐层第$h$个神经元的连接权为$v_{ih}$，
-隐层层第$h$个神经元与输出层第$j$个神经元的连接权为$w_{ih}$.
-记隐层第$h$个神经元接收到的输入为$\alpha_h=\sum_{i=1}^d v_{ih}x_i$，
-输出层第$j$个神经元的输出为$\beta_j=\sum_{h=1}^{q}{w_{hj}b_h}$，
-$b_h$为隐层第$h$个神经元的输出.
-假设隐层和输出层都使用 Sigmoid 函数.
-
-对训练例$\left(\mathbf{x}_k, \mathbf{y}_k\right)$，
-假定输出为$\hat{\mathbf{y}}_k=\left(\hat{y}_1^k, \hat{y}_2^k, \ldots, \hat{y}_l^k\right)$，
-即:
-
-\begin{equation}
-    \label{eq:yjk}
-    \hat{y}_j^k = f\left(\beta_j-\theta_j\right)
-\end{equation}
-
-则均方误差为：
-
-\begin{equation}
-    \label{eq:mse}
-    E_k=\frac{1}{2}\sum_{j=1}^l{{\left(\hat{y}_l^k-y_j^k\right)}^2}
-\end{equation}
-
-根据\cref{eq:mse}，
-以目标的负梯度方向对参数进行调整.
-给定学习率$\eta$，
-有：
-
-\begin{equation}
-    \Delta w_{hj}=\eta\frac{\partial{E_k}}{\partial{w_{hj}}}
-\end{equation}
-
-\begin{equation}
-    \label{eq:partial}
-    \frac{\partial{E_k}}{\partial{w_{hj}}}=\frac{\partial{E_k}}{\partial{\hat{y}_j^k}}\cdot\frac{\partial{\hat{y}_j^k}}{\partial{\beta_j}}\cdot\frac{\partial{\beta_j}}{\partial{w_{hj}}}
-\end{equation}
-
-由$\beta$的定义可以得出：
-
-\begin{equation}
-    \label{eq:b}
-    \frac{\partial \beta_j}{\partial w_{hj}} = b_h
-\end{equation}
-
-对于\cref{eq:sigmoid}中 Sigmoid 来说，
-有：
-
-\begin{equation}
-    f^{\prime}\left(x\right) = f\left(x\right)\left(1-f\left(x\right)\right)
-\end{equation}
-
-于是根据\cref{eq:yjk}和\cref{eq:mse}，
-有：
-
-\begin{equation}
-    \label{eq:g}
-    \begin{aligned}
-        g _ { j } & = - \frac { \partial E _ { k } } { \partial \hat { y } _ { j } ^ { k } } \cdot \frac { \partial \hat { y } _ { j } ^ { k } } { \partial \beta _ { j } } \\
-                  & = - ( \hat { y } _ { j } ^ { k } - y _ { j } ^ { k } ) f ^ { \prime } ( \beta _ { j } - \theta _ { j } )                                                \\
-                  & = \hat { y } _ { j } ^ { k } ( 1 - \hat { y } _ { j } ^ { k } ) ( y _ { j } ^ { k } - \hat { y } _ { j } ^ { k } )
-    \end{aligned}
-\end{equation}
-
-把\cref{eq:g}和\cref{eq:b}代入\cref{eq:partial}，
-即可得出 BP 算法中关于$w_{ij}$的更新公式：
-
-\begin{equation}
-    \label{eq:whj}
-    \Delta w_{hj} = \eta g_j b_h
-\end{equation}
-
-同理可得：
-
-\begin{align}
-    \Delta\theta_j                   & = -\eta g_j   \\
-    \label{eq:vih}\Delta v_{ih}      & = \eta e_h x_i \\
-    \label{eq:gammah}\Delta \gamma_h & = -\eta e_h
-\end{align}
-
-\cref{eq:vih}和\cref{eq:gammah}中：
-
-\begin{equation}
-    \label{eq:e}
-    \begin{aligned}
-        e _ { h } & = - \frac { \partial E _ { k } } { \partial b _ { h } } \cdot \frac { \partial b _ { h } } { \partial \alpha _ { h } }                                                                                \\
-                  & = - \sum _ { j = 1 } ^ { l } \frac { \partial E _ { k } } { \partial \beta _ { j } } \cdot \frac { \partial \beta _ { j } } { \partial b _ { h } } f ^ { \prime } ( \alpha _ { h } - \gamma _ { h } ) \\
-                  & = \sum _ { j = 1 } ^ { l } w _ { h j } g _ { j } f ^ { \prime } ( \alpha _ { h } - \gamma _ { h } )                                                                                                   \\
-                  & = b _ { h } ( 1 - b _ { h } ) \sum _ { j = 1 } ^ { l } w _ { h j } g _ { j }
-    \end{aligned}
-\end{equation}
-
-可以得到计算的算法如\cref{alg:nn}所示\cite{zhouzhihuaJiQiXueXi}.
-
-\begin{algorithm}
-    \KwIn{训练集$D={\left\{(x_k, y_k)\right\}}^m_{k=1}$; 学习率$\eta$.}
-    在$(0, 1)$范围内随机初始化网络中所有链接权和阈值\;
-    \Repeat{达到停止条件}{
-        \ForAll{$(\mathbf{x}_k, \mathbf{y}_k) \in D$}{
-            根据当前参数和\cref{eq:yjk}计算当前样本的输出$\hat{\mathbf{y}}_k$\;
-            根据\cref{eq:g}计算输出层神经元的梯度项$g_j$\;
-            根据\cref{eq:e}计算隐层神经元的梯度项$e_h$\;
-            根据\cref{eq:whj}~--\cref{eq:gammah}更新连接权$w_{hj}$，$v_{ih}$与阈值$\theta_j$，$\gamma_h$
-        }
-    }
-    \KwOut{连接权与阈值确定的多层前馈神经网络}
-    \caption{反向传播算法}\label{alg:nn}
-\end{algorithm}
+本文将着重介绍Adam算法.
 
 \subsubsection{Adam算法}
 
@@ -215,6 +91,8 @@ Adam算法结合了以上算法的优点，
     \KwOut{$\theta_t$}
     \caption{Adam算法}\label{alg:adam}
 \end{algorithm}
+
+\subsubsection{Adam算法优化}
 
 虽然Adam算法成为了深度学习中最强大最有效的优化算法之一，
 但是仍然有一定的问题，
@@ -256,12 +134,4 @@ YOGI对Adam算法的重写如\cref{alg:yogi}所示.
     }
     \KwOut{$\theta_t$}
     \caption{YOGI算法}\label{alg:yogi}
-\end{algorithm}
-
-\subsection{分类问题的处理}
-
-对于二分类问题，
-可以对输出神经元设定阈值$k$与激活函数$f$，
-当输出值$\hat{y}>k\;(0\leqslant\hat{y}\leqslant1)$时，
-输出$1$，
-否则输出$0$. % chktex 17
+\end{algorithm} % chktex 17
