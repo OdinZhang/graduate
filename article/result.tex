@@ -1,5 +1,32 @@
 \section{系统实验与结果分析}
 
+\subsection{实验环境}
+
+本实验主要使用PyTorch框架实现，
+使用了Pandas、
+NumPy、
+gensim等第三方库，
+其详细配置如\cref{tb:device}所示。
+
+\begin{table}[!htbp]
+  \begin{center}
+    \caption{实验环境配置}\label{tb:device}
+    \begin{tabular}{cc}
+      \toprule
+      实验环境    & 规格                                          \\
+      \midrule
+      操作系统    & Ubuntu Desktop 20.04 LTS                    \\
+      运行内存    & 24GB                                        \\
+      CPU     & Intel (R) Core (TM) i7--8750H CPU @ 2.20GHz \\
+      GPU     & NVIDIA GeForce GTX 1060 6G                  \\
+      PyTorch & 1.11.0                                      \\
+      CUDA    & 11.3                                        \\
+      Python  & 3.9.5                                       \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+\end{table}
+
 \subsection{数据处理}
 
 \subsubsection{数据集的来源}
@@ -14,17 +41,17 @@
 该数据集的基本统计情况如\cref{tb:dataset}所示.
 
 \begin{table}[!htbp]
-	\begin{center}
-		\caption{Steam数据集基本统计情况}\label{tb:dataset}
-		\begin{tabular}{cccc}
-			\toprule
-			条目 & 数量        & 条目 & 数量     \\
-			\midrule
-			评论 & 7,793,069 & 项目 & 15,474 \\
-			用户 & 2,567,538 & 合集 & 615    \\
-			\bottomrule
-		\end{tabular}
-	\end{center}
+  \begin{center}
+    \caption{Steam数据集基本统计情况}\label{tb:dataset}
+    \begin{tabular}{cccc}
+      \toprule
+      条目 & 数量        & 条目 & 数量     \\
+      \midrule
+      评论 & 7,793,069 & 项目 & 15,474 \\
+      用户 & 2,567,538 & 合集 & 615    \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
 \end{table}
 
 \subsubsection{数据的展示}
@@ -161,7 +188,7 @@ Steam游戏数据以及Steam用户评论数据，
 之后对密集数据进行标准化，
 标准化的公式为：
 \begin{equation}
-	\hat{x} = \frac{x-\mu}{\sigma}
+  \hat{x} = \frac{x-\mu}{\sigma}
 \end{equation}
 
 其中$\mu$为数据的平均值，
@@ -197,9 +224,9 @@ FM模块主要将离散数据分别交给嵌入层和全连接层进行处理，
 模块的设计主要见\cref{fig:fm}
 
 \begin{figure}[!htbp]
-	\centering
-	\includegraphics[width=.9\textwidth]{images/fm.pdf}
-	\caption{FM模块设计}\label{fig:fm}
+  \centering
+  \includegraphics[width=.9\textwidth]{images/fm.pdf}
+  \caption{FM模块设计}\label{fig:fm}
 \end{figure}
 
 \subsubsection{Word2Vec模块设计}
@@ -226,9 +253,9 @@ Word2Vec模块主要在预训练阶段把标签数据进行训练，
 网络的设计可见\cref{fig:deep}.
 
 \begin{figure}[!htbp]
-	\centering
-	\includegraphics[width=.9\textwidth]{images/deep.pdf}
-	\caption{深度神经网络模块设计}\label{fig:deep}
+  \centering
+  \includegraphics[width=.9\textwidth]{images/deep.pdf}
+  \caption{深度神经网络模块设计}\label{fig:deep}
 \end{figure}
 
 \subsection{评价指标}
@@ -255,18 +282,18 @@ Word2Vec模块主要在预训练阶段把标签数据进行训练，
 因此采用二分类交叉熵损失（BCE）.
 其计算公式为：
 \begin{equation}
-	L=-\sum_{i=1}^{N}\left[y_{i} \ln \left(\sigma\left(x_{i}\right)\right)+\left(1-y_{i}\right) \ln \left(1-\sigma\left(x_{i}\right)\right)\right]
+  L=-\sum_{i=1}^{N}\left[y_{i} \ln \left(\sigma\left(x_{i}\right)\right)+\left(1-y_{i}\right) \ln \left(1-\sigma\left(x_{i}\right)\right)\right]
 \end{equation}
 
 此时有：
 \begin{equation}
-	\begin{aligned}
-		\frac{d L}{d x_{i}} & =\frac{d L}{d \sigma\left(x_{i}\right)} \cdot \frac{d \sigma\left(x_{i}\right)}{d x_{i}}                                                                                         \\
-		                    & =-\left[\frac{y_{i}}{\sigma\left(x_{i}\right)}+\left(1-y_{i}\right) \frac{-1}{1-\sigma\left(x_{i}\right)}\right] \sigma\left(x_{i}\right)\left(1-\sigma\left(x_{i}\right)\right) \\
-		                    & =\left(\frac{1-y_{i}}{1-\sigma\left(x_{i}\right)}-\frac{y_{i}}{\sigma\left(x_{i}\right)}\right) \sigma\left(x_{i}\right)\left(1-\sigma\left(x_{i}\right)\right)                  \\
-		                    & =\left(1-y_{i}\right) \sigma\left(x_{i}\right)-y_{i}\left(1-\sigma\left(x_{i}\right)\right)                                                                                      \\
-		                    & =\sigma\left(x_{i}\right)-y_{i}
-	\end{aligned}
+  \begin{aligned}
+    \frac{d L}{d x_{i}} & =\frac{d L}{d \sigma\left(x_{i}\right)} \cdot \frac{d \sigma\left(x_{i}\right)}{d x_{i}}                                                                                         \\
+                        & =-\left[\frac{y_{i}}{\sigma\left(x_{i}\right)}+\left(1-y_{i}\right) \frac{-1}{1-\sigma\left(x_{i}\right)}\right] \sigma\left(x_{i}\right)\left(1-\sigma\left(x_{i}\right)\right) \\
+                        & =\left(\frac{1-y_{i}}{1-\sigma\left(x_{i}\right)}-\frac{y_{i}}{\sigma\left(x_{i}\right)}\right) \sigma\left(x_{i}\right)\left(1-\sigma\left(x_{i}\right)\right)                  \\
+                        & =\left(1-y_{i}\right) \sigma\left(x_{i}\right)-y_{i}\left(1-\sigma\left(x_{i}\right)\right)                                                                                      \\
+                        & =\sigma\left(x_{i}\right)-y_{i}
+  \end{aligned}
 \end{equation}
 
 其中$ \sigma(x)=\frac{1}{1+e^{-x}} $.
@@ -280,9 +307,9 @@ BCE作为损失函数所得到的梯度值正比于预测值与真实值之差.
 对数据集进行训练可以得到训练的结果如\cref{fig:loss}所示.
 
 \begin{figure}[!htbp]
-	\centering
-	\includegraphics[width=.7\textwidth]{images/loss.pdf}
-	\caption{模型损失率曲线}\label{fig:loss}
+  \centering
+  \includegraphics[width=.7\textwidth]{images/loss.pdf}
+  \caption{模型损失率曲线}\label{fig:loss}
 \end{figure}
 
 由图所示，
