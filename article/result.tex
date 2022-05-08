@@ -296,7 +296,7 @@ Word2Vec模块主要在预训练阶段把标签数据进行训练，
   \end{aligned}
 \end{equation}
 
-其中$ \sigma(x)=\frac{1}{1+e^{-x}} $.
+其中$ \sigma(x)=1/\left(1+e^{-x}\right) $.
 
 此时可以看到采用Sigmoid作为激活函数与
 BCE作为损失函数所得到的梯度值正比于预测值与真实值之差.
