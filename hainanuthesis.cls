@@ -168,7 +168,7 @@
 			\coveritem{\ziju{2}系别}{\thisdepartment}
 			\coveritem{\ziju{2}专业}{\thismajor}
 			\coveritem{指导教师}{\thisteacher}
-			{完成日期：\makebox[14.5\ccwd]{\makebox[3\ccwd]{\number\year}年\makebox[2.5\ccwd]{\number\month}月\makebox[2.5\ccwd]{\number\day}日}\\}
+			{完成日期：\makebox[14.5\ccwd]{\makebox[3\ccwd]{2022}年\makebox[2.5\ccwd]{5}月\makebox[2.5\ccwd]{15}日}\\}
 		}
 	\end{center}
 	\newpage

@@ -1,4 +1,4 @@
-latex = latexmk --synctex=1 --interaction=nonstopmode --file-line-error --pdf --xelatex
+latex = latexmk  --shell-escape --synctex=1 --interaction=nonstopmode --file-line-error --pdf --xelatex
 latex_images = latexmk --synctex=1 --interaction=nonstopmode --file-line-error --pdf --xelatex --outdir=./images
 
 all: M-P_nn_model.pdf ReLU.pdf Sigmoid.pdf word2vec.pdf model.pdf fm.pdf deep.pdf loss.pdf
